@@ -1,4 +1,8 @@
-file="images"
+if [ $0 == master ]; then
+  file="images"
+else
+  file="node-images"
+fi
 
 if [ -f "$file" ]
 then
@@ -6,7 +10,7 @@ then
 
   while IFS='=' read -r key value
   do
-    #echo "${key}=${value}"
+    echo "${key}=${value}"
     docker pull ${value}
     docker tag ${value} ${key}
     docker rmi ${value}
